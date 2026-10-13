@@ -1,0 +1,14 @@
+Metadata-Version: 2.4
+Name: agent-eval-harness
+Version: 0.1.0
+Summary: Fault-injection evaluation harness for LLM agent workflows: stress-test agents, detect failure modes, compare policies.
+Author: Shuchi Sinha
+License: MIT
+Keywords: ai-safety,evaluation,agents,red-teaming,fault-injection
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Provides-Extra: anthropic
+Requires-Dist: anthropic>=0.40; extra == "anthropic"

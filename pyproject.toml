@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agent-eval-harness"
+version = "0.1.0"
+description = "Fault-injection evaluation harness for LLM agent workflows: stress-test agents, detect failure modes, compare policies."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.10"
+authors = [{ name = "Shuchi Sinha" }]
+keywords = ["ai-safety", "evaluation", "agents", "red-teaming", "fault-injection"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+[project.optional-dependencies]
+anthropic = ["anthropic>=0.40"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
