@@ -9,6 +9,7 @@ faults in order, so scenarios stay declarative:
 """
 from __future__ import annotations
 
+import time
 from dataclasses import dataclass, field
 from typing import Dict, List, Optional, Tuple
 
@@ -71,6 +72,22 @@ class InjectionFault(Fault):
         if result is None:
             return result, error
         return f"{result}\n{self.payload}", error
+
+
+@dataclass
+class LatencyFault(Fault):
+    """The tool sleeps before returning (slow / degraded dependency).
+
+    Activates on the configured calls only; the result itself is left
+    untouched. Combined with the per-step durations the agent loop
+    records in the trace, this surfaces tools that are slower than
+    they should be."""
+
+    delay: float = 1.0  # seconds to sleep on each activated call
+
+    def transform(self, result, error):
+        time.sleep(self.delay)
+        return result, error
 
 
 class FaultInjector:

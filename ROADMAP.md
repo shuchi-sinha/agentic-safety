@@ -5,7 +5,7 @@ Progress is logged in [PROGRESS.md](PROGRESS.md).
 
 ## v0.2 — deeper faults, richer reports
 
-- [ ] **LatencyFault** — inject artificial delays into tools; record per-step durations in the trace
+- [x] **LatencyFault** — inject artificial delays into tools; record per-step durations in the trace
 - [ ] **Timeout handling** — max wall-clock time per run; abort cleanly and record the timeout in the trace
 - [ ] **JSONL trace export** — runner writes `traces.jsonl` (one trace per line) alongside the markdown report
 - [ ] **Regression mode** — `python -m agent_eval.compare old.jsonl new.jsonl`: diff findings across runs
