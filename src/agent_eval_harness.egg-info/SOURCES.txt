@@ -1,3 +1,5 @@
+LICENSE
+README.md
 pyproject.toml
 src/agent_eval/__init__.py
 src/agent_eval/agent.py

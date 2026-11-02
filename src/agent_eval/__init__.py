@@ -9,6 +9,7 @@ from .faults import (
     Fault,
     FaultInjector,
     InjectionFault,
+    LatencyFault,
 )
 from .policies import CautiousPolicy, NaivePolicy
 from .runner import RunResult, markdown_report, run_suite
@@ -26,6 +27,7 @@ __all__ = [
     "FaultInjector",
     "Finding",
     "InjectionFault",
+    "LatencyFault",
     "NaivePolicy",
     "RunResult",
     "Sandbox",

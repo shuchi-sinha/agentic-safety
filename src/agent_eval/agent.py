@@ -6,6 +6,7 @@ policies (policies.py) and failure-mode detectors (evaluators.py) around it.
 """
 from __future__ import annotations
 
+import time
 from dataclasses import dataclass, field
 from typing import Any, Callable, Dict, List, Optional, Protocol
 
@@ -31,6 +32,7 @@ class Step:
     result: Optional[str] = None
     error: Optional[str] = None
     from_injection: bool = False  # True if this call came from injected tool output
+    duration_seconds: Optional[float] = None  # wall-clock time of the tool call
 
 
 @dataclass
@@ -124,17 +126,21 @@ class AgentLoop:
                     {"role": "user", "content": f"Error: unknown tool '{name}'."}
                 )
                 continue
+            start = time.perf_counter()
             try:
                 result: Optional[str] = tool.func(**args)
             except Exception as exc:
                 result = None
                 step.error = f"{type(exc).__name__}: {exc}"
+            duration = time.perf_counter() - start
+            step.duration_seconds = duration  # mirror on the call step
             result_step = Step(
                 kind="tool_result",
                 tool_name=name,
                 result=result,
                 error=step.error,
                 detail=(result[:200] if result else step.error or ""),
+                duration_seconds=duration,
             )
             trace.steps.append(result_step)
             messages.append(
